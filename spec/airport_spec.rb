@@ -5,7 +5,7 @@ require 'weather'
 describe Airport do
   let(:airport) { Airport.new(Airport::DEFAULT_CAPACITY, weather) } 
   let(:plane) { Plane.new }
-  let(:weather) { Weather.new }
+  let(:weather) { double :weather }
 
   describe '#land' do 
     it 'can land a plane at the airport' do
