@@ -10,9 +10,8 @@ describe Airport do
   describe '#land' do 
     it 'can land a plane at the airport' do
       allow(weather).to receive(:stormy?).and_return false
-      expect(plane).to receive(:land) # mocks 
+      expect(plane).to receive(:land)
       airport.land(plane)
-      # expect(airport).to respond_to(:land).with(1).argument 
     end
     context 'when full' do
       it 'prevents a plane from landing' do
@@ -33,13 +32,10 @@ describe Airport do
     context 'when not stormy' do
       it 'allows a plane to take off from the airport' do
         allow(weather).to receive(:stormy?).and_return false
-      
           airport.land(plane)
-          expect(plane).to receive(:take_off) # mocks 
+          expect(plane).to receive(:take_off)
           airport.take_off(plane)
         end
-        # expect(airport).to respond_to(:take_off).with(1).argument
-      # end 
     end 
     context 'when stormy' do
       it 'prevents a plane from taking off' do
