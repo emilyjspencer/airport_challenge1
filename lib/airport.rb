@@ -1,5 +1,6 @@
 require_relative 'weather'
 
+
 class Airport
   attr_accessor :capacity 
   
@@ -14,11 +15,13 @@ class Airport
   def land(plane)
     fail "Unable to land. Airport is full!" if full? 
     fail "Unable to land due to stormy weather" if stormy?
+    plane.land
     @planes.push(plane)
   end 
 
   def take_off(plane)
     fail "Unable to take off due to stormy weather" if stormy?
+    plane.take_off
     @planes.pop
   end 
 

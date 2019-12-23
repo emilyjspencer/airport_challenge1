@@ -4,13 +4,15 @@ require 'weather'
 
 describe Airport do
   let(:airport) { Airport.new(Airport::DEFAULT_CAPACITY, weather) } 
-  let(:plane) { Plane.new }
+  let(:plane) { double :plane, land: nil, take_off: nil }
   let(:weather) { double :weather }
 
   describe '#land' do 
     it 'can land a plane at the airport' do
       allow(weather).to receive(:stormy?).and_return false
-      expect(airport).to respond_to(:land).with(1).argument 
+      expect(plane).to receive(:land) # mocks 
+      airport.land(plane)
+      # expect(airport).to respond_to(:land).with(1).argument 
     end
     context 'when full' do
       it 'prevents a plane from landing' do
@@ -31,8 +33,13 @@ describe Airport do
     context 'when not stormy' do
       it 'allows a plane to take off from the airport' do
         allow(weather).to receive(:stormy?).and_return false
-        expect(airport).to respond_to(:take_off).with(1).argument
-      end 
+      
+          airport.land(plane)
+          expect(plane).to receive(:take_off) # mocks 
+          airport.take_off(plane)
+        end
+        # expect(airport).to respond_to(:take_off).with(1).argument
+      # end 
     end 
     context 'when stormy' do
       it 'prevents a plane from taking off' do
